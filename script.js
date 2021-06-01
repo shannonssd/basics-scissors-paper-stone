@@ -1,4 +1,4 @@
-// Create Scissors Paper Stone Game with input validation
+// Create Scissors Paper Stone Game with formatting
 
 // Create function which generates random number
 var generateRandomNum = function () {
@@ -27,7 +27,7 @@ var main = function (userGuess) {
   // Call function which generates computer's choice into main function
   var computerChoice = assignNumToOptions();
   // Create defaults statement where user loses
-  var myOutputValue = `Sorry, you lost! 😿 You chose ${userGuess} but the computer chose ${computerChoice}. Please try again! ✂️🧻🗿`;
+  var myOutputValue = `Sorry, you lost! 😿 <br> You chose ${userGuess} <br>  The computer chose ${computerChoice} <br> <br>Please try again! ✂️🧻🗿`;
   // Create condition where scissors beats paper and user wins
   // Create condition where paper beats stone and user wins
   // Create condition where stone beats scissors and user wins
@@ -36,16 +36,16 @@ var main = function (userGuess) {
     (userGuess == "paper" && computerChoice == "stone") ||
     (userGuess == "stone" && computerChoice == "scissors")
   ) {
-    myOutputValue = `Congratulations, you won! 😁 You chose ${userGuess} and the computer chose ${computerChoice} ✂🧻🗿.`;
+    myOutputValue = `Congratulations, you won! 😁 <br> You chose ${userGuess} <br> The computer chose ${computerChoice}  <br> <br>Wanna try again? ✂️🧻🗿`;
   }
   // Create condition where input = program output and result is a draw
   if (userGuess == computerChoice) {
-    myOutputValue = `Darn, it's a draw! 😡 You chose ${userGuess} and the computer chose the same! Please try again! ✂️🧻🗿`;
+    myOutputValue = `Darn, it's a draw! 😡 <br> You chose ${userGuess} <br> The computer chose the same! <br><br> Please try again! ✂️🧻🗿`;
   }
   // If user types anything other than "scissors", "paper" or "stone", inform them that only these 3 words are vaild options
   if (userGuess != "scissors" && userGuess != "paper" && userGuess != "stone") {
     myOutputValue =
-      "Sorry, you entered an invalid option! 😅 Please enter one of the following options: scissors, paper or stone. ✂️🧻🗿";
+      "Sorry, you entered an invalid option! 😅 <br> Please enter one of the following options: <br> <br> ✂️ scissors  <br><br>🧻 paper  <br><br> 🗿 stone ";
   }
   return myOutputValue;
 };
