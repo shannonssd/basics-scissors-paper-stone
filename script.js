@@ -1,4 +1,4 @@
-// Create Scissors Paper Stone Game
+// Create Scissors Paper Stone Game with input validation
 
 // Create function which generates random number
 var generateRandomNum = function () {
@@ -42,6 +42,10 @@ var main = function (userGuess) {
   if (userGuess == computerChoice) {
     myOutputValue = `Darn, it's a draw! 😡 You chose ${userGuess} and the computer chose the same! Please try again! ✂️🧻🗿`;
   }
-
+  // If user types anything other than "scissors", "paper" or "stone", inform them that only these 3 words are vaild options
+  if (userGuess != "scissors" && userGuess != "paper" && userGuess != "stone") {
+    myOutputValue =
+      "Sorry, you entered an invalid option! 😅 Please enter one of the following options: scissors, paper or stone. ✂️🧻🗿";
+  }
   return myOutputValue;
 };
