@@ -1,4 +1,4 @@
-// Create Scissors Paper Stone Game with formatting
+// Create Scissors Paper Stone Game with reverse rules!
 
 // Create function which generates random number
 var generateRandomNum = function () {
@@ -24,28 +24,42 @@ var assignNumToOptions = function () {
 };
 
 var main = function (userGuess) {
+  // Create variable where user guess is turned into string which only outputs scissors/paper/stone
+  if (userGuess == "reversed scissors") {
+    var playerChoice = "scissors";
+  }
+  if (userGuess == "reversed paper") {
+    playerChoice = "paper";
+  }
+  if (userGuess == "reversed stone") {
+    playerChoice = "stone";
+  }
   // Call function which generates computer's choice into main function
   var computerChoice = assignNumToOptions();
   // Create defaults statement where user loses
-  var myOutputValue = `Sorry, you lost! 😿 <br> You chose ${userGuess} <br>  The computer chose ${computerChoice} <br> <br>Please try again! ✂️🧻🗿`;
-  // Create condition where scissors beats paper and user wins
-  // Create condition where paper beats stone and user wins
-  // Create condition where stone beats scissors and user wins
+  var myOutputValue = `Sorry, you lost reverse Scissors Paper Stone 😂  <br> You chose ${playerChoice} <br>  The computer chose ${computerChoice} <br> <br>Please try again! ✂️🧻🗿`;
+  // Create condition where scissors beats stone and user wins
+  // Create condition where paper beats scissors and user wins
+  // Create condition where stone beats paper and user wins
   if (
-    (userGuess == "scissors" && computerChoice == "paper") ||
-    (userGuess == "paper" && computerChoice == "stone") ||
-    (userGuess == "stone" && computerChoice == "scissors")
+    (playerChoice == "scissors" && computerChoice == "stone") ||
+    (playerChoice == "paper" && computerChoice == "scissors") ||
+    (playerChoice == "stone" && computerChoice == "paper")
   ) {
-    myOutputValue = `Congratulations, you won! 😁 <br> You chose ${userGuess} <br> The computer chose ${computerChoice}  <br> <br>Wanna try again? ✂️🧻🗿`;
+    myOutputValue = `Congratulations, you won reverse Scissors Paper Stone! 😁 <br> You chose ${playerChoice} <br> The computer chose ${computerChoice}  <br> <br>Wanna try again? ✂️🧻🗿`;
   }
   // Create condition where input = program output and result is a draw
-  if (userGuess == computerChoice) {
-    myOutputValue = `Darn, it's a draw! 😡 <br> You chose ${userGuess} <br> The computer chose the same! <br><br> Please try again! ✂️🧻🗿`;
+  if (playerChoice == computerChoice) {
+    myOutputValue = `Darn, it's a draw! 😡 <br> You chose ${playerChoice} <br> The computer chose the same! <br><br> Please try again! ✂️🧻🗿`;
   }
-  // If user types anything other than "scissors", "paper" or "stone", inform them that only these 3 words are vaild options
-  if (userGuess != "scissors" && userGuess != "paper" && userGuess != "stone") {
+  // If user types anything other than "reversed scissors", "reversed paper" or "reversed stone", inform them that only these 3 words are vaild options
+  if (
+    userGuess != "reversed scissors" &&
+    userGuess != "reversed paper" &&
+    userGuess != "reversed stone"
+  ) {
     myOutputValue =
-      "Sorry, you entered an invalid option! 😅 <br> Please enter one of the following options: <br> <br> ✂️ scissors  <br><br>🧻 paper  <br><br> 🗿 stone ";
+      "Sorry, you entered an invalid option! 😅 <br> Please enter one of the following options: <br> <br> ✂️ reversed scissors  <br><br>🧻 reversed paper  <br><br> 🗿 reversed stone ";
   }
   return myOutputValue;
 };
