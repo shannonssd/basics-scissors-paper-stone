@@ -52,10 +52,10 @@
   <body>
     <h1 id="header">Basics: Scissors Paper Stone 🚀</h1>
     <div id="container">
-      <p>Please Enter Your Name:</p>
+      <p id="user-input">Please Enter Your Name:</p>
       <input id="input-field" />
       <button id="submit-button">Submit</button>
-      <p>Game Result:</p>
+      <p id="output-message">Your Name:</p>
       <div id="output-div"></div>
     </div>
     <!-- Import program logic -->
@@ -74,6 +74,10 @@
 
         // Reset input value
         input.value = "";
+        var userInputText = document.getElementById("user-input");
+        userInputText.innerHTML = `Hello ${userName}! <br> Please enter scissors, paper or stone to play!`;
+        var outputMessage = document.getElementById("output-message");
+        outputMessage.innerHTML = "Game Results";
       });
     </script>
   </body>
