@@ -1,4 +1,4 @@
-// Create Scissors Paper Stone Game with User Name Inclusion
+// Create Scissors Paper Stone Game with Formatting and Add a Message telling them how they're doing
 
 // Create global variable to track user and computer win as well as no of draws
 var userWin = 0;
@@ -21,8 +21,9 @@ var generateRandomNum = function () {
 var assignNumToOptions = function () {
   // Call random number function into assigment function
   var randomNum = generateRandomNum();
+  var programOutput = "";
   if (randomNum == 1) {
-    var programOutput = "scissors";
+    programOutput = "scissors";
   }
   if (randomNum == 2) {
     programOutput = "paper";
@@ -32,10 +33,24 @@ var assignNumToOptions = function () {
   }
   return programOutput;
 };
-
+// Declare win percentage variable
+var winPercentage = 0;
+// Create function to determine commentary message based on win percentage
+var toDetermineMessage = function () {
+  var message = "";
+  if (winPercentage >= 50) {
+    message = `Keep it up ${userName}! You're doing well!`;
+    console.log("message statement", message);
+  } else {
+    message = `You're losing quite a bit ${userName}! But I believe in you! 😬`;
+  }
+  return message;
+};
+// function which determines what
 var main = function (input) {
   // Call function which generates computer's choice into main function
   var computerChoice = assignNumToOptions();
+
   // Create default statement
   var myOutputValue = "";
   // Create condition where user loses
@@ -46,6 +61,7 @@ var main = function (input) {
     // Switch to SPS game
     gameMode = "SPS";
   } else if (gameMode == "SPS") {
+    // Create condition where computer wins
     if (
       (input == "scissors" && computerChoice == "stone") ||
       (input == "paper" && computerChoice == "scissors") ||
@@ -54,8 +70,9 @@ var main = function (input) {
       // Update value of global variable for computer win count
       compWin = compWin + 1;
       // Create variable which outputs user win percentage
-      var winPercentage = (userWin / (userWin + compWin + draws)) * 100;
-      myOutputValue = `Sorry ${userName}, you lost! 😿 <br> You chose ${input} <br>  The computer chose ${computerChoice} <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> <br>Please try again! ✂️🧻🗿`;
+      winPercentage = (userWin / (userWin + compWin + draws)) * 100;
+      var displayMessage = toDetermineMessage();
+      myOutputValue = `Sorry ${userName}, you lost! 😿 <br> You chose ${input} <br>  The computer chose ${computerChoice} <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage} <br> <br>Please try again! ✂️🧻🗿`;
     }
 
     // Create condition where scissors beats paper and user wins
@@ -70,7 +87,8 @@ var main = function (input) {
       userWin = userWin + 1;
       // ?Call win percentage variable into winning conditional
       winPercentage = (userWin / (userWin + compWin + draws)) * 100;
-      myOutputValue = `Congratulations ${userName}, you won! 😁 <br> You chose ${input} <br> The computer chose ${computerChoice}. <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%.  <br> <br>Wanna try again? ✂️🧻🗿`;
+      displayMessage = toDetermineMessage();
+      myOutputValue = `Congratulations ${userName}, you won! 😁 <br> You chose ${input} <br> The computer chose ${computerChoice}. <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage}  <br> <br>Wanna try again? ✂️🧻🗿`;
     }
     // Create condition where input = program output and result is a draw
     if (input == computerChoice) {
@@ -78,7 +96,8 @@ var main = function (input) {
       draws = draws + 1;
       // ?Call win percentage variable into winning conditional
       winPercentage = (userWin / (userWin + compWin + draws)) * 100;
-      myOutputValue = `Darn ${userName}, it's a draw! 😡 <br> You chose ${input} <br> The computer chose the same! <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br><br> Please try again! ✂️🧻🗿`;
+      displayMessage = toDetermineMessage();
+      myOutputValue = `Darn ${userName}, it's a draw! 😡 <br> You chose ${input} <br> The computer chose the same! <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage} <br><br> Please try again! ✂️🧻🗿`;
     }
     // If user types anything other than "scissors", "paper" or "stone", inform them that only these 3 words are vaild options
     if (input != "scissors" && input != "paper" && input != "stone") {
