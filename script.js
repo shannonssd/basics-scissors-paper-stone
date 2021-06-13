@@ -50,7 +50,10 @@ var createInputValidation = function (input) {
     input != "scissors" &&
     input != "stone" &&
     input != "reversed" &&
-    input != "normal"
+    input != "normal" &&
+    input != "Computer" &&
+    input != "korean" &&
+    input != "computer"
   ) {
     validationMessage = `Invalid input ${userName}. <br> Please enter either scissors, paper or stone. <br> If you would like to play reversed mode type in reversed. <br> If you would like to go back to normal mode type in normal.`;
   }
@@ -99,6 +102,46 @@ var normalSPS = function (userName, input) {
   return spsOutputValue;
 };
 
+// Function for game state where computer chooses for player
+var comChoiceSPS = function (userName, input) {
+  if (input == "computer") {
+    var comChooseForPlayer = assignNumToWord();
+  }
+  var comChoiceOutputValue = "";
+  comChoiceOutputValue = createInputValidation(userName, input);
+  var computerChoice = assignNumToWord();
+
+  if (
+    (comChooseForPlayer == "scissors" && computerChoice == "stone") ||
+    (comChooseForPlayer == "paper" && computerChoice == "scissors") ||
+    (comChooseForPlayer == "stone" && computerChoice == "paper")
+  ) {
+    compWin = compWin + 1;
+    winPercentage = calculateWinPercentage();
+    displayMessage = toDetermineMessage();
+    comChoiceOutputValue = `Sorry ${userName}, you lost computer selected SPS! 😿 <br> The computer chose ${comChooseForPlayer} for you. <br>  The computer chose ${computerChoice} <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage} <br> <br>Please try again! ✂️🧻🗿`;
+  }
+
+  if (
+    (comChooseForPlayer == "scissors" && computerChoice == "paper") ||
+    (comChooseForPlayer == "paper" && computerChoice == "stone") ||
+    (comChooseForPlayer == "stone" && computerChoice == "scissors")
+  ) {
+    userWin = userWin + 1;
+    winPercentage = calculateWinPercentage();
+    displayMessage = toDetermineMessage();
+    comChoiceOutputValue = `Congratulations ${userName}, you won computer selected SPS! 😁 <br> The computer chose ${comChooseForPlayer} for you.  <br> The computer chose ${computerChoice}. <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage}  <br> <br>Wanna try again? ✂️🧻🗿`;
+  }
+  if (comChooseForPlayer == computerChoice) {
+    draws = draws + 1;
+    winPercentage = calculateWinPercentage();
+    displayMessage = toDetermineMessage();
+    comChoiceOutputValue = `Darn ${userName}, it's a draw! 😡 <br> You chose ${comChooseForPlayer} <br> The computer chose the same! <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage} <br><br> Please try again! ✂️🧻🗿`;
+  }
+
+  return comChoiceOutputValue;
+};
+
 // Function to execute korean SPS game
 var koreanSPS = function (userName, input) {
   var koreanSPSOutputValue = "";
@@ -144,8 +187,8 @@ var main = function (input) {
 
   if (gameMode == "waiting for user to enter name") {
     userName = input;
-
-    myOutputValue = `Hello ${userName}! Ready to play SPS?`;
+    // Instructions for various game modes
+    myOutputValue = `Hello ${userName}! <br> Ready to play SPS? <br> Select 'scissors', 'paper' or 'stone' to play. <br> You can also toggle between different game modes by typing either <br> 'korean' <br>'Computer' <br>'normal' <br><br> For computer mode, the computer will choose for you, all you have to do is type 'computer'`;
     gameMode = "SPS";
   } else if (gameMode == "SPS") {
     myOutputValue = normalSPS(userName, input);
@@ -153,12 +196,28 @@ var main = function (input) {
     if (input == "korean") {
       gameMode = "korean SPS";
     }
+    if (input == "Computer") {
+      gameMode = "computer choice SPS";
+    }
   }
   if (gameMode == "korean SPS") {
     myOutputValue = koreanSPS(userName, input);
-    // Change game state back to normal mode if player types 'normal'
+    // Change game state back to normal mode or computer mode
     if (input == "normal") {
       gameMode = "SPS";
+    }
+    if (input == "Computer") {
+      gameMode = "computer choice SPS";
+    }
+  }
+  if (gameMode == "computer choice SPS") {
+    myOutputValue = comChoiceSPS(userName, input);
+    // Change game state back to normal mode or computer mode
+    if (input == "normal") {
+      gameMode = "SPS";
+    }
+    if (input == "korean") {
+      gameMode = "korean SPS";
     }
   }
 
