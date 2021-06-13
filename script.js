@@ -43,23 +43,6 @@ var toDetermineMessage = function () {
   return message;
 };
 
-// Function to implement input validation
-var createInputValidation = function (input) {
-  if (
-    input != "paper" &&
-    input != "scissors" &&
-    input != "stone" &&
-    input != "reversed" &&
-    input != "normal" &&
-    input != "Computer" &&
-    input != "korean" &&
-    input != "computer"
-  ) {
-    validationMessage = `Invalid input ${userName}. <br> Please enter either scissors, paper or stone. <br> If you would like to play reversed mode type in reversed. <br> If you would like to go back to normal mode type in normal.`;
-  }
-  return validationMessage;
-};
-
 // Function to calculcate win percentage
 var calculateWinPercentage = function () {
   return (userWin / (userWin + compWin + draws)) * 100;
@@ -68,7 +51,25 @@ var calculateWinPercentage = function () {
 // Function to execute normal SPS game
 var normalSPS = function (userName, input) {
   var spsOutputValue = "";
-  spsOutputValue = createInputValidation(userName, input);
+  spsOutputValue = `Welcome to normal SPS!`;
+  // Output message when changing modes
+  if (input == "Computer") {
+    spsOutputValue = `Welcome to computer's choice SPS! Type 'computer' to play!`;
+  }
+  if (input == "korean") {
+    spsOutputValue = `Welcome to korean SPS!`;
+  }
+  if (
+    input != "paper" &&
+    input != "scissors" &&
+    input != "stone" &&
+    input != "reversed" &&
+    input != "normal" &&
+    input != "Computer" &&
+    input != "korean"
+  ) {
+    spsOutputValue = `Invalid input ${userName}. <br> Please enter either scissors, paper or stone. <br> If you would like to play reversed mode type in reversed. <br> If you would like to go back to normal mode type in normal.`;
+  }
   var computerChoice = assignNumToWord();
 
   if (
@@ -108,7 +109,26 @@ var comChoiceSPS = function (userName, input) {
     var comChooseForPlayer = assignNumToWord();
   }
   var comChoiceOutputValue = "";
-  comChoiceOutputValue = createInputValidation(userName, input);
+  comChoiceOutputValue = `Welcome to computer selected SPS! Type 'computer' to play!`;
+  // Output message when changing modes
+  if (input == "normal") {
+    comChoiceOutputValue = `Welcome to normal SPS!`;
+  }
+  if (input == "korean") {
+    comChoiceOutputValue = `Welcome to korean SPS!`;
+  }
+  if (
+    input != "paper" &&
+    input != "scissors" &&
+    input != "stone" &&
+    input != "reversed" &&
+    input != "normal" &&
+    input != "Computer" &&
+    input != "korean" &&
+    input != "computer"
+  ) {
+    comChoiceOutputValue = `Invalid input ${userName}. <br> Please enter either scissors, paper or stone. <br> If you would like to play reversed mode type in reversed. <br> If you would like to go back to normal mode type in normal.`;
+  }
   var computerChoice = assignNumToWord();
 
   if (
@@ -145,7 +165,26 @@ var comChoiceSPS = function (userName, input) {
 // Function to execute korean SPS game
 var koreanSPS = function (userName, input) {
   var koreanSPSOutputValue = "";
-  koreanSPSOutputValue = createInputValidation(userName, input);
+
+  koreanSPSOutputValue = `Welcome to korean SPS!`;
+  // Output message when changing modes
+  if (input == "normal") {
+    koreanSPSOutputValue = `Welcome to normal SPS!`;
+  }
+  if (input == "Computer") {
+    koreanSPSOutputValue = `Welcome to computer's choice SPS! Type 'computer' to play!`;
+  }
+  if (
+    input != "paper" &&
+    input != "scissors" &&
+    input != "stone" &&
+    input != "reversed" &&
+    input != "normal" &&
+    input != "Computer" &&
+    input != "korean"
+  ) {
+    koreanSPSOutputValue = `Invalid input ${userName}. <br> Please enter either scissors, paper or stone. <br> If you would like to play reversed mode type in reversed. <br> If you would like to go back to normal mode type in normal.`;
+  }
   var computerChoice = assignNumToWord();
 
   if (
