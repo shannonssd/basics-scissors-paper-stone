@@ -1,3 +1,8 @@
+// keep track of latest winner
+// output latest winner when there is a draw
+
+// Global variable to keep track of lastest winner
+var latestWinner = "It seems you drew on the first try! Please try again.";
 // Global variables to keep track of game outcomes
 var userWin = 0;
 var compWin = 0;
@@ -74,6 +79,7 @@ var normalSPS = function (userName, input) {
     compWin = compWin + 1;
     winPercentage = calculateWinPercentage();
     displayMessage = toDetermineMessage();
+    latestWinner = "The computer is the ultimate winner!";
     spsOutputValue = `Sorry ${userName}, you lost! 😿 <br> You chose ${input} <br>  The computer chose ${computerChoice} <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage} <br> <br>Please try again! ✂️🧻🗿`;
   }
 
@@ -85,13 +91,15 @@ var normalSPS = function (userName, input) {
     userWin = userWin + 1;
     winPercentage = calculateWinPercentage();
     displayMessage = toDetermineMessage();
+    latestWinner = "You are the ultimate winner!";
     spsOutputValue = `Congratulations ${userName}, you won! 😁 <br> You chose ${input} <br> The computer chose ${computerChoice}. <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage}  <br> <br>Wanna try again? ✂️🧻🗿`;
   }
   if (input == computerChoice) {
     draws = draws + 1;
     winPercentage = calculateWinPercentage();
     displayMessage = toDetermineMessage();
-    spsOutputValue = `Darn ${userName}, it's a draw! 😡 <br> You chose ${input} <br> The computer chose the same! <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage} <br><br> Please try again! ✂️🧻🗿`;
+    spsOutputValue = `${latestWinner}`;
+    latestWinner = "It seems you drew on the first try! Please try again.";
   }
 
   return spsOutputValue;
@@ -110,6 +118,7 @@ var reverseSPS = function (userName, input) {
     compWin = compWin + 1;
     winPercentage = calculateWinPercentage();
     displayMessage = toDetermineMessage();
+    latestWinner = "The computer is the ultimate winner!";
     reverseSPSOutputValue = `Sorry ${userName}, you lost reversed SPS! 😿 <br> You chose ${input} <br>  The computer chose ${computerChoice} <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage} <br> <br>Please try again! ✂️🧻🗿`;
   }
 
@@ -121,13 +130,15 @@ var reverseSPS = function (userName, input) {
     userWin = userWin + 1;
     winPercentage = calculateWinPercentage();
     displayMessage = toDetermineMessage();
+    latestWinner = "You are the ultimate winner!";
     reverseSPSOutputValue = `Congratulations ${userName}, you won reversed SPS! 😁 <br> You chose ${input} <br> The computer chose ${computerChoice}. <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage}  <br> <br>Wanna try again? ✂️🧻🗿`;
   }
   if (input == computerChoice) {
     draws = draws + 1;
     winPercentage = calculateWinPercentage();
     displayMessage = toDetermineMessage();
-    reverseSPSOutputValue = `Darn ${userName}, it's a draw in reversed SPS! 😡 <br> You chose ${input} <br> The computer chose the same! <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage} <br><br> Please try again! ✂️🧻🗿`;
+    reverseSPSOutputValue = `${latestWinner}`;
+    latestWinner = "It seems you drew on the first try! Please try again.";
   }
   return reverseSPSOutputValue;
 };
