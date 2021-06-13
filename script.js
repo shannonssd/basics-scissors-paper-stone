@@ -1,6 +1,3 @@
-// keep track of latest winner
-// output latest winner when there is a draw
-
 // Global variable to keep track of lastest winner
 var latestWinner = "It seems you drew on the first try! Please try again.";
 // Global variables to keep track of game outcomes
@@ -79,7 +76,6 @@ var normalSPS = function (userName, input) {
     compWin = compWin + 1;
     winPercentage = calculateWinPercentage();
     displayMessage = toDetermineMessage();
-    latestWinner = "The computer is the ultimate winner!";
     spsOutputValue = `Sorry ${userName}, you lost! 😿 <br> You chose ${input} <br>  The computer chose ${computerChoice} <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage} <br> <br>Please try again! ✂️🧻🗿`;
   }
 
@@ -91,56 +87,56 @@ var normalSPS = function (userName, input) {
     userWin = userWin + 1;
     winPercentage = calculateWinPercentage();
     displayMessage = toDetermineMessage();
-    latestWinner = "You are the ultimate winner!";
     spsOutputValue = `Congratulations ${userName}, you won! 😁 <br> You chose ${input} <br> The computer chose ${computerChoice}. <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage}  <br> <br>Wanna try again? ✂️🧻🗿`;
   }
   if (input == computerChoice) {
     draws = draws + 1;
     winPercentage = calculateWinPercentage();
     displayMessage = toDetermineMessage();
-    spsOutputValue = `${latestWinner}`;
-    latestWinner = "It seems you drew on the first try! Please try again.";
+    spsOutputValue = `Darn ${userName}, it's a draw! 😡 <br> You chose ${input} <br> The computer chose the same! <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage} <br><br> Please try again! ✂️🧻🗿`;
   }
 
   return spsOutputValue;
 };
 
-// Function to execute reverse SPS game
-var reverseSPS = function (userName, input) {
-  computerChoice = assignNumToWord();
-  var reverseSPSOutputValue = "";
-  reverseSPSOutputValue = createInputValidation(userName, input);
-  if (
-    (input == "scissors" && computerChoice == "paper") ||
-    (input == "paper" && computerChoice == "stone") ||
-    (input == "stone" && computerChoice == "scissors")
-  ) {
-    compWin = compWin + 1;
-    winPercentage = calculateWinPercentage();
-    displayMessage = toDetermineMessage();
-    latestWinner = "The computer is the ultimate winner!";
-    reverseSPSOutputValue = `Sorry ${userName}, you lost reversed SPS! 😿 <br> You chose ${input} <br>  The computer chose ${computerChoice} <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage} <br> <br>Please try again! ✂️🧻🗿`;
-  }
+// Function to execute korean SPS game
+var koreanSPS = function (userName, input) {
+  var koreanSPSOutputValue = "";
+  koreanSPSOutputValue = createInputValidation(userName, input);
+  var computerChoice = assignNumToWord();
 
   if (
     (input == "scissors" && computerChoice == "stone") ||
     (input == "paper" && computerChoice == "scissors") ||
     (input == "stone" && computerChoice == "paper")
   ) {
+    compWin = compWin + 1;
+    winPercentage = calculateWinPercentage();
+    displayMessage = toDetermineMessage();
+    latestWinner = "It's a draw! <br> The computer is the ultimate winner!";
+    koreanSPSOutputValue = `Sorry ${userName}, you lost Korean SPS! 😿 <br> You chose ${input} <br>  The computer chose ${computerChoice} <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage} <br> <br>Please try again! ✂️🧻🗿`;
+  }
+
+  if (
+    (input == "scissors" && computerChoice == "paper") ||
+    (input == "paper" && computerChoice == "stone") ||
+    (input == "stone" && computerChoice == "scissors")
+  ) {
     userWin = userWin + 1;
     winPercentage = calculateWinPercentage();
     displayMessage = toDetermineMessage();
-    latestWinner = "You are the ultimate winner!";
-    reverseSPSOutputValue = `Congratulations ${userName}, you won reversed SPS! 😁 <br> You chose ${input} <br> The computer chose ${computerChoice}. <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage}  <br> <br>Wanna try again? ✂️🧻🗿`;
+    latestWinner = "It's a draw! <br> You are the ultimate winner!";
+    koreanSPSOutputValue = `Congratulations ${userName}, you won Korean SPS! 😁 <br> You chose ${input} <br> The computer chose ${computerChoice}. <br> You've won: ${userWin} times. <br> The computer has won ${compWin} times. <br> You have drawn: ${draws} times. <br> Your win percentage is ${winPercentage}%. <br> ${displayMessage}  <br> <br>Wanna try again? ✂️🧻🗿`;
   }
   if (input == computerChoice) {
     draws = draws + 1;
     winPercentage = calculateWinPercentage();
     displayMessage = toDetermineMessage();
-    reverseSPSOutputValue = `${latestWinner}`;
+    koreanSPSOutputValue = `${latestWinner}`;
     latestWinner = "It seems you drew on the first try! Please try again.";
   }
-  return reverseSPSOutputValue;
+
+  return koreanSPSOutputValue;
 };
 
 var main = function (input) {
@@ -154,12 +150,12 @@ var main = function (input) {
   } else if (gameMode == "SPS") {
     myOutputValue = normalSPS(userName, input);
     // Change game state to reverse mode if player types 'reversed'
-    if (input == "reversed") {
-      gameMode = "reversed mode";
+    if (input == "korean") {
+      gameMode = "korean SPS";
     }
   }
-  if (gameMode == "reversed mode") {
-    myOutputValue = reverseSPS(userName, input);
+  if (gameMode == "korean SPS") {
+    myOutputValue = koreanSPS(userName, input);
     // Change game state back to normal mode if player types 'normal'
     if (input == "normal") {
       gameMode = "SPS";
