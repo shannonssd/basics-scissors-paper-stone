@@ -1,4 +1,5 @@
 // Global variable to keep track of lastest winner
+/// I've made changes over here.
 var latestWinner = "It seems you drew on the first try! Please try again.";
 // Global variables to keep track of game outcomes
 var userWin = 0;
