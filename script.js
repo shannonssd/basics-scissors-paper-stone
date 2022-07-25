@@ -1,3 +1,4 @@
+// BASICS 16-3 DEMO SPS
 // Global variable to keep track of lastest winner
 /// I've made changes over here.
 var latestWinner = "It seems you drew on the first try! Please try again.";
