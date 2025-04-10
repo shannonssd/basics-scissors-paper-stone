@@ -1,4 +1,4 @@
 # Rocket Academy Coding Basics: Scissors Paper Stone
 
 test
-test3
+test-latest-3
